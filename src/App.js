@@ -5,7 +5,9 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Form from './components/common/Form';
 import Home from './components/Home';
+// eslint-disable-next-line no-unused-vars
 import { app } from './firebase-config';
+import './App.css';
 
 function App() {
   const [email, setEmail] = useState('');
@@ -18,7 +20,7 @@ function App() {
     if (id === 1) {
       signInWithEmailAndPassword(authentication, email, password)
         .then((response) => {
-          navigate('/home');
+          navigate('/');
           sessionStorage.setItem('Auth Token', response._tokenResponse.refreshToken);
         }).catch((error) => {
           if (error.code === 'auth/wrong-password') {
@@ -33,7 +35,7 @@ function App() {
     if (id === 2) {
       createUserWithEmailAndPassword(authentication, email, password)
         .then((response) => {
-          navigate('/home');
+          navigate('/');
           sessionStorage.setItem('Auth Token', response._tokenResponse.refreshToken);
         }).catch((error) => {
           if (error.code === 'auth/email-already-in-use') {
@@ -47,7 +49,7 @@ function App() {
     const authToken = sessionStorage.getItem('Auth Token');
 
     if (authToken) {
-      navigate('/home');
+      navigate('/');
     }
   }, []);
 
@@ -79,7 +81,7 @@ function App() {
         />
 
         <Route
-          path="/home"
+          path="/"
           element={<Home />}
         />
       </Routes>
